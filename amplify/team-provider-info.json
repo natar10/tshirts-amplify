@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tshirts-dev-230154-authRole",
+      "UnauthRoleArn": "arn:aws:iam::141517589033:role/amplify-tshirts-dev-230154-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::141517589033:role/amplify-tshirts-dev-230154-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-tshirts-dev-230154-deployment",
+      "UnauthRoleName": "amplify-tshirts-dev-230154-unauthRole",
+      "StackName": "amplify-tshirts-dev-230154",
+      "StackId": "arn:aws:cloudformation:us-west-2:141517589033:stack/amplify-tshirts-dev-230154/fb9c2680-2f2a-11ed-b6cc-0677a14b79ad",
+      "AmplifyAppId": "d2j5qhbhxl3gmd"
+    },
+    "categories": {
+      "auth": {
+        "tshirtsauth": {}
+      }
+    }
+  }
+}
