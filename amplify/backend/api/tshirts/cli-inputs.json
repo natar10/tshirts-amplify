@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "tshirts",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authtshirtsauth"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 30,
+        "apiKeyExpirationDate": "2022-10-08T05:05:49.965Z",
+        "keyDescription": "api for tshirts app"
+      },
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
+  }
+}

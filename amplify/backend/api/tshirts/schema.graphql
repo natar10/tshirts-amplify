@@ -1,0 +1,101 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+# input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type Client @model @auth(rules: [{ allow: owner, provider: userPools }]) {
+  id: ID!
+  user: String!
+  name: String!
+  lastname: String!
+  city: String!
+  state: String!
+  country: String!
+  zip: String!
+  phone: String!
+  email: AWSEmail!
+  deliveryAddress: [Delivery!] @hasMany
+  orders: [Order] @hasMany
+}
+
+type Delivery @model @auth(rules: [{ allow: owner, provider: userPools }]) {
+  id: ID!
+  city: String!
+  state: String!
+  country: String!
+  zip: String!
+  phone: String!
+  address: String!
+  details: String
+  order: Order @belongsTo
+  client: Client @belongsTo
+}
+
+type Product @model @auth(rules: [
+  { allow: public, operations: [read], provider: iam},
+  { allow: owner, provider: userPools }
+]) {
+  id: ID!
+  name: String!
+  price: Float!
+  weight: Float
+  options: [ProductOptions!]!
+  thumbnail: AWSURL!
+  images: [AWSURL!]!
+  description: String!
+  avilable: Boolean!
+  unlimited: Boolean!
+  extraDetails: String
+  order: [Order!] @manyToMany(relationName: "ProductOrders")
+}
+
+type ProductOptions {
+  name: String!
+  thumbnail: String!
+  colorCode: String!
+  stock: Int!
+}
+
+type Order @model @auth(rules: [{ allow: owner, provider: userPools }]) {
+  id: ID!
+  title: String!
+  date: AWSDateTime!
+  total: Float!
+  orderDetails: [OrderDetail!]!
+  client: Client @belongsTo
+  delivery: Delivery @hasOne
+  status: OrderStatus!
+  paymentStatus:PaymentStatus!
+  paymentType: PaymentType!
+  products: [Product!] @manyToMany(relationName: "ProductOrders")
+}
+
+type OrderDetail {
+  productID: String!
+  productName: String!
+  productColor: String!
+  productThumbnail: String!
+  quantity: Int!
+  total: Float!
+}
+
+enum OrderStatus {
+  received
+  procesing
+  delivering
+  delivered
+  canceled
+}
+
+enum PaymentStatus {
+  procesing
+  acepted
+  rejected
+  pending
+}
+
+enum PaymentType {
+  cash
+  bankWire
+  creditCard
+  paypal
+}
