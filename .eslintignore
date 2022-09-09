@@ -9,9 +9,6 @@ vite.config.ts
 yarn.lock
 jest.config.js
 .vscode
-.eslintignore
-yarn-error.log
-.husky
 amplify.yml
 
 # Ignore all HTML files:
